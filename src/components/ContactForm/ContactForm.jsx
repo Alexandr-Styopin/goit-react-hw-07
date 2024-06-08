@@ -1,10 +1,9 @@
-import { nanoid } from "@reduxjs/toolkit";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useId } from "react";
 import * as Yup from "yup";
-
 import { addContact } from "../../redux/contactsSlice";
+import { getContacts } from "../../redux/selectors";
 
 const initialValues = {
   name: "",
@@ -22,11 +21,11 @@ const FeedbackSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export default function ContactForm({ onFormSubmit }) {
+export default function ContactForm() {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
-  const contacts = useSelector((state) => state.contacts.items);
+  const contacts = useSelector(getContacts);
   const disptch = useDispatch();
 
   const handleSubmitForm = (values, actions) => {
