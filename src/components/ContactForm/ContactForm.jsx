@@ -26,7 +26,7 @@ export default function ContactForm({ onFormSubmit }) {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
-  const contacts = useSelector((state) => state.contactsSlice.items);
+  const contacts = useSelector((state) => state.contacts.items);
   const disptch = useDispatch();
 
   const handleSubmitForm = (values, actions) => {
