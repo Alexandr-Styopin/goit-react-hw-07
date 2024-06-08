@@ -31,7 +31,6 @@ export default function ContactForm({ onFormSubmit }) {
 
   const handleSubmitForm = (values, actions) => {
     disptch(addContact(values.name, values.number));
-    // saveContactsToLocalStorage(newContacts);
     actions.resetForm();
   };
 
