@@ -1,21 +1,19 @@
 import Contact from "./Contact/Contact";
-import { getContacts, getFilters } from "../../redux/selectors";
 import { useSelector } from "react-redux";
+import { getIsLoading, getError } from "../../redux/selectors";
+import { getFilteredContacts } from "../../redux/contactsSlice";
+import Loader from "../Loader/Loader";
 
 export default function ContactList() {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilters);
-
-  const filtredContacts = () => {
-    return contacts.filter((contact) =>
-      contact.name.toLocaleLowerCase().includes(filter)
-    );
-  };
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
+  const filteredContacts = useSelector(getFilteredContacts);
 
   return (
     <div>
       <ul>
-        {filtredContacts().map((contact) => (
+        {isLoading && !error && <Loader />}
+        {filteredContacts.map((contact) => (
           <Contact key={contact.id} contact={contact} />
         ))}
       </ul>
